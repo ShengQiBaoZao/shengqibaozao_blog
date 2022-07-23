@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="zh-CN"><head><!-- hexo injector head_begin start --><link href="https://cdn.jsdelivr.net/npm/hexo-widget-tree@0.2.2/css/index.css" rel="stylesheet"/><!-- hexo injector head_begin end --><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#1975ff"><meta name="author" content="圣奇宝枣"><meta name="copyright" content="圣奇宝枣"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>Git简单教程 | 圣奇宝枣的博客小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/star-markdown-css@0.3.3/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://npm.elemecdn.com/prism-theme-vars/base.css"><script src="https://npm.elemecdn.com/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link class="aplayer-style-marker" rel="stylesheet" type="text/css" href="https://npm.elemecdn.com/aplayer@latest/dist/APlayer.min.css"><script class="aplayer-script-marker" src="https://npm.elemecdn.com/aplayer@latest/dist/APlayer.min.js" defer></script><script class="meting-script-marker" src="https://npm.elemecdn.com/meting@1/dist/Meting.min.js" defer></script><script src="https://npm.elemecdn.com/pjax@latest/pjax.min.js" defer></script><script src="/js/pjax.js" defer type="module"></script><script src="https://npm.elemecdn.com/vue@2.6.14"></script><link rel="icon" type="image/png" href="https://s2.loli.net/2022/05/22/4s8QIyo6OEiavVD.png"><link rel="mask-icon" href="https://s2.loli.net/2022/05/22/4s8QIyo6OEiavVD.png" color="#1975ff"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://npm.elemecdn.com/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"www.shengqibaozao.eu.org","root":"/","title":"圣奇宝枣的博客小站","version":"1.10.4","mode":"time","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn?c=a&c=d&c=e&c=f&c=g&c=i&c=j&c=k","hitokoto":true},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]},"waline":{"config":{"enable":true,"serverURL":"https://waline-swart-ten.vercel.app","comment":true,"visitor":false,"emoji":["https://unpkg.com/@waline/emojis@1.0.1/bilibili","https://unpkg.com/@waline/emojis@1.0.1/weibo","https://unpkg.com/@waline/emojis@1.0.1/qq"],"locale":{"placeholder":"填写邮箱，可以收到回复通知哦～"},"requiredMeta":["nick"],"el":"#waline","lang":"zh-CN"},"cdn":"https://npm.elemecdn.com/@waline/client@v2/dist/waline.js","dark":"html.dark"},"vendors":{"darken":"https://npm.elemecdn.com/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();</script><script>CONFIG.leancloudVisitors = {"enable":true,"app_id":"0yBk9ey9VK6RjMoWpNk1rr8n-MdYXbMMI","app_key":"4q0zlsryvWqA1L1MItJOVpel","server_url":null}</script><script defer src="/js/analytics/leancloud-visitors.js" type="module"></script><meta name="description" content="版本管理工具Git的基本使用教程，内含常用本地命令，分支命令，远程命令以及一些优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git简单教程">
+<meta property="og:url" content="https://www.shengqibaozao.eu.org/2022/05/20/Git%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="圣奇宝枣的博客小站">
+<meta property="og:description" content="版本管理工具Git的基本使用教程，内含常用本地命令，分支命令，远程命令以及一些优化">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-20T00:30:14.000Z">
+<meta property="article:modified_time" content="2022-05-20T02:56:37.000Z">
+<meta property="article:author" content="圣奇宝枣">
+<meta property="article:tag" content="基础技能">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="版本管理工具">
+<meta name="twitter:card" content="summary"><script>(function() {
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://npm.elemecdn.com/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="圣奇宝枣"><img width="96" loading="lazy" src="https://s2.loli.net/2022/05/22/4s8QIyo6OEiavVD.png" alt="圣奇宝枣"><span class="site-author-status" title="加班升天中">😇</span></a><div class="site-author-name"><a href="/about/">圣奇宝枣</a></div><span class="site-name">圣奇宝枣的博客小站</span><sub class="site-subtitle">有朋自远方来，不亦乐乎。愿与你相识，得闲饮茶</sub><div class="site-description">知识分享与个人记录</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-4-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">29</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">7</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="site-state-item-count">32</span></a></div><a class="site-state-item hty-icon-button" href="/comment/" title="留言板"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:clipboard-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://s2.loli.net/2022/07/20/wzmFPjMJH1eXR4g.jpg" title="微信(请扫描二维码添加)" target="_blank" style="color:#1AAD19"><span class="icon iconify" data-icon="ri:wechat-2-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://s2.loli.net/2022/07/20/gzCHZvQdkwqLt84.jpg" title="QQ(请扫描二维码添加)" target="_blank" style="color:#12B7F5"><span class="icon iconify" data-icon="ri:qq-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/ShengQiBaoZao" title="GitHub(个人页面)" target="_blank" style="color:#181717"><span class="icon iconify" data-icon="ri:github-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:lty15376767691@gmail.com" title="E-Mail：lty15376767691@gmail.com" target="_blank" style="color:#8E71C1"><span class="icon iconify" data-icon="ri:mail-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=509242587" title="网易云音乐(点此跳转)" target="_blank" style="color:#C10D0C"><span class="icon iconify" data-icon="ri:netease-cloud-music-line"></span></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/347061710" title="Bilibili(点此跳转)" target="_blank" style="color:#FF8EB3"><span class="icon iconify" data-icon="ri:bilibili-line"></span></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><span class="icon iconify" data-icon="ri:genderless-line"></span></a><a class="links-item hty-icon-button" href="/girls/" title="可爱的女孩子" style="color:hotpink"><span class="icon iconify" data-icon="ri:women-line"></span></a><a class="links-item hty-icon-button" href="/donate/" title="给点给点~" style="color:#ff944d"><span class="icon iconify" data-icon="ri:hand-coin-line"></span></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">Git 的工作流程概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">Git 安装与基础命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git-%E5%B8%B8%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%91%BD%E4%BB%A4"><span class="toc-number">3.</span> <span class="toc-text">git 常用本地命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git-%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">git 分支管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%89%98%E7%AE%A1"><span class="toc-number">5.</span> <span class="toc-text">远程仓库托管</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%B5%E5%BA%95%E8%AF%84%E8%AE%BA"><span class="toc-number">6.</span> <span class="toc-text">页底评论</span></a></li></ol></div></div></div><div class="tag-cloud"><div class="tag-cloud-tags"><a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 12px; color: #9bf">C语言</a> <a href="/tags/Git/" style="font-size: 12px; color: #9bf">Git</a> <a href="/tags/Github-Calendar/" style="font-size: 12px; color: #9bf">Github Calendar</a> <a href="/tags/Hexo%E5%8D%9A%E5%AE%A2/" style="font-size: 30px; color: #1975ff">Hexo博客</a> <a href="/tags/Linux/" style="font-size: 12px; color: #9bf">Linux</a> <a href="/tags/Markdown/" style="font-size: 12px; color: #9bf">Markdown</a> <a href="/tags/Microsoft-5E-%E8%AE%A2%E9%98%85/" style="font-size: 12px; color: #9bf">Microsoft 5E 订阅</a> <a href="/tags/Office-365/" style="font-size: 12px; color: #9bf">Office 365</a> <a href="/tags/PicGO/" style="font-size: 12px; color: #9bf">PicGO</a> <a href="/tags/Python3/" style="font-size: 21px; color: #5998ff">Python3</a> <a href="/tags/SEO%E6%94%B6%E5%BD%95/" style="font-size: 12px; color: #9bf">SEO收录</a> <a href="/tags/Sitemap%E5%9C%B0%E5%9B%BE/" style="font-size: 12px; color: #9bf">Sitemap地图</a> <a href="/tags/VScode/" style="font-size: 12px; color: #9bf">VScode</a> <a href="/tags/Vercel/" style="font-size: 12px; color: #9bf">Vercel</a> <a href="/tags/yun%E4%B8%BB%E9%A2%98/" style="font-size: 12px; color: #9bf">yun主题</a></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#1975ff;"><link itemprop="mainEntityOfPage" href="https://www.shengqibaozao.eu.org/2022/05/20/Git%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="圣奇宝枣"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="圣奇宝枣的博客小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Git简单教程<a class="post-edit-link" href="https://github.com/ShengQiBaoZao/shengqibaozao_blog/tree/hexo/source/_posts/Git简单教程.md" target="_blank" title="编辑" rel="noopener"><span class="icon iconify" data-icon="ri:edit-line"></span></a></h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <span class="post-meta-icon-text">发表于</span> <time title="创建时间：2022-05-20 08:30:14" itemprop="dateCreated datePublished" datetime="2022-05-20T08:30:14+08:00">2022-05-20</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><span class="icon iconify" data-icon="ri:file-word-line"></span></span> <span title="本文字数">1.2k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读时长"><span class="icon iconify" data-icon="ri:timer-line"></span></span> <span title="阅读时长">4m</span></span></span><span class="leancloud_visitors" id="/2022/05/20/Git%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/" data-flag-title="Git简单教程"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="阅读次数"><span class="icon iconify" data-icon="ri:eye-line"></span> <span class="leancloud-visitors-count"></span></span></span><span class="post-meta-divider">-</span><a href="#comment"><span class="post-meta-item-icon" title="评论数"><span class="icon iconify" data-icon="ri:chat-3-line"></span> <span class="waline-comment-count" id="/2022/05/20/Git%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/"></span></span></a><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E4%B8%93%E4%B8%9A%E6%8A%80%E8%83%BD%E6%95%99%E7%A8%8B/" style="--text-color:#cc33ff" itemprop="url" rel="index"><span itemprop="text">专业技能教程</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/%E5%9F%BA%E7%A1%80%E6%8A%80%E8%83%BD/" style="--text-color:#ff99dd"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">基础技能</span></a><a class="tag-item" href="/tags/Git/" style="--text-color:#ff4d4d"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">Git</span></a><a class="tag-item" href="/tags/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" style="--text-color:#00b300"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">版本管理工具</span></a></span></div><div class="post-author"><span class="author-name">圣奇宝枣</span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><hr>
+<h4 id="Git-的工作流程概述"><a href="#Git-的工作流程概述" class="headerlink" title="Git 的工作流程概述"></a><strong>Git 的工作流程概述</strong></h4><hr>
+<div class="info">
+
+<blockquote>
+<p>1.<strong>clone</strong>(<strong>克隆</strong>)：从远程仓库中克隆代码到本地仓库<br>2.<strong>checkout</strong>(<strong>检出</strong>)：从本地仓库中检出一个仓库分支然后进行修订<br>3.<strong>add</strong>(<strong>添加</strong>)：在提交前先将代码提交到暂存区<br>4.<strong>commit</strong>(<strong>提交</strong>)：提交到本地仓库。本地仓库中保存修改的各个历史版本<br>5.<strong>fetch</strong>(<strong>抓取</strong>)：从远程库，抓取到本地仓库，不进行任何的合并动作，一般操作比较少。<br>6.<strong>pull</strong>(<strong>拉取</strong>)：从远程库拉到本地库，自动进行合并(merge),然后放到到工作区，相当于 fetch+merge<br>7.<strong>push</strong>(<strong>推送</strong>)：修改完成后，需要和团队成员共享代码时，将代码推送到远程仓库</p>
+</blockquote>
+</div>
+
+<span id="more"></span>
+
+<hr>
+<h4 id="Git-安装与基础命令"><a href="#Git-安装与基础命令" class="headerlink" title="Git 安装与基础命令"></a><strong>Git 安装与基础命令</strong></h4><hr>
+<ul>
+<li><p>在<strong>Git Bash</strong>中可以使用一些<strong>Linux</strong>的<strong>基本命令</strong></p>
+<ul>
+<li><code>ls</code>&#x2F;<code>ll</code>：查看当前目录文件，<code>ll</code>同 Linux 的<code>ls -l</code>查看隐藏文件</li>
+<li><code>cat</code>：查看文件内容</li>
+<li><code>touch</code>：创建文件</li>
+<li><code>vi</code>：使用 vi 编辑器</li>
+</ul>
+</li>
+<li><p>安装 Git 后首先要进行<strong>用户配置</strong></p>
+<ul>
+<li>打开<strong>Git Bash</strong>，执行<code>git config --global user.name &quot;名称&quot;</code>，设置用户名</li>
+<li>执行<code>git config --global user.email &quot;邮箱&quot;</code>，设置邮箱</li>
+<li>不写后面修改的信息，则为查看当前设置的信息</li>
+</ul>
+</li>
+<li><p>为<strong>常用指令</strong>配置<strong>别名</strong>(根据个人需求)</p>
+<ul>
+<li>在用户目录下创建<code>.bashrc</code>文件，如果不允许使用点开头，则可以在<strong>Git Bash</strong>使用<code>touch ~/.bashrc</code>指令</li>
+<li>在<code>.bashrc</code>文件中按<code>alias 别名=&#39;被替换的指令&#39;</code>格式写入</li>
+</ul>
+</li>
+<li><p>解决 Git<strong>乱码问题</strong></p>
+<ul>
+<li>在<strong>Git Bash</strong>中输入<code>git config --global core.quotepath false</code></li>
+<li>然后在<strong>根目录\etc\bash.bashrc</strong>文件中加入下面两行：</li>
+</ul>
+<pre class="language-none"><code class="language-none">export LANG&#x3D;&quot;zh_CN.UTF-8&quot;
+export LC_ALL&#x3D;&quot;zh_CN.UTF-8&quot;</code></pre></li>
+</ul>
+<hr>
+<h4 id="git-常用本地命令"><a href="#git-常用本地命令" class="headerlink" title="git 常用本地命令"></a><strong>git 常用本地命令</strong></h4><hr>
+<ul>
+<li><code>git init</code>：在需要管理的<strong>文件夹</strong>下使用<code>git init</code><strong>初始化</strong>本地仓库，随后文件夹下会多出<code>.git</code>的隐藏文件夹,用于 git 存储信息</li>
+<li><code>git add</code>：使用<code>git add .</code>将目录下所有文件<strong>添加更新</strong>到<strong>暂存区</strong>，也可将点变为文件名添加指定文件</li>
+<li><code>git commit</code>：使用<code>git commit -m &quot;提交说明&quot;</code>将<strong>暂存区</strong>的修改提交到<strong>本地仓库</strong></li>
+<li><code>git status</code>：使用<code>git status</code>查看文件状态</li>
+<li><code>git log</code> ：使用<code>git log</code>查看文件提交历史，可以用<strong>后缀</strong>来<strong>优化显示</strong>，执行下列指令，将使用<code>git lg</code>作为别名<pre class="language-none"><code class="language-none">git config --global alias.lg &quot;log --color --graph --pretty&#x3D;format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&quot;</code></pre></li>
+<li><code>git reset</code>：使用<code>git reset --hard 标识ID</code><strong>回退</strong>到<strong>需要的版本</strong></li>
+<li><code>git reflog</code>：使用<code>git reflog</code><strong>查看已删除</strong>的提交记录</li>
+</ul>
+<hr>
+<h4 id="git-分支管理"><a href="#git-分支管理" class="headerlink" title="git 分支管理"></a><strong>git 分支管理</strong></h4><hr>
+<ul>
+<li><code>git branch</code>：<strong>查看</strong>本地分支</li>
+<li><code>git branch 分支名</code>：<strong>创建</strong>本地分支</li>
+<li><code>git checkout 分支名</code>：<strong>切换</strong>分支</li>
+<li><code>git checkout -b 分支名</code>：<strong>创建并切换</strong>分支</li>
+<li><code>git merge 分支名</code>：<strong>合并</strong>分支，将<strong>输入</strong>的分支<strong>合并到当前</strong>所在分支中</li>
+<li><code>git branch -d 分支名</code>：<strong>删除</strong>分支，将<code>-d</code>换为<code>-D</code>为强制删除</li>
+<li><strong>合并冲突</strong>：合并时<strong>出现冲突</strong>，查看冲突的文件，箭头指向 HEAD 的为当前分支，此外为其他分支，将冲突文件中冲突<strong>手动解决</strong>(<strong>只留下需要的内容</strong>)，再次提交</li>
+</ul>
+<hr>
+<h4 id="远程仓库托管"><a href="#远程仓库托管" class="headerlink" title="远程仓库托管"></a><strong>远程仓库托管</strong></h4><hr>
+<ul>
+<li><strong>创建</strong>远程仓库，可选 github、gitee、gitlib 等</li>
+<li><strong>配置 SSH 公钥</strong>：使用<code>ssh-keygen -t rsa</code><strong>创建</strong>公钥，一路回车即可，如果已存在则自动覆盖。使用<code>cat ~/.ssh/id_rsa.pub</code><strong>查看</strong>公钥，复制后写入设置(随后可以访问 SSH 链接)</li>
+<li><strong>连接仓库</strong>：使用<code>git remote add origin(本地显示名，最好写origin) 仓库地址</code><strong>连接</strong>仓库，使用<code>git remote</code><strong>查看</strong>连接的仓库</li>
+<li><strong>推送</strong>：使用<code>git push origin(仓库名) master(本地分支)</code><strong>推送</strong>到远程仓库，表示将本地 master 分支推送到 origin 所连接的仓库。如果<strong>远程仓库分支名</strong>与<strong>本地相同</strong>则可以<strong>只写分支名</strong></li>
+<li><strong>建立关联</strong>：使用<code>git push --set-upstream origin master</code>可以<strong>建立关联</strong>，此后可以<strong>不写仓库名</strong>与<strong>分支名</strong></li>
+<li><strong>其他补充</strong>：使用<code>git push origin 本地分支名:远端分支名</code>来将<strong>指定本地分支</strong>推到<strong>指定远端分支</strong>，此外，在 origin 前写<code>-f</code>表示<strong>强制覆盖</strong></li>
+<li><code>git clone</code>：使用<code>git clone 仓库地址 本地路径</code>将远程仓库<strong>所有</strong>文件<strong>克隆</strong>到本地</li>
+<li><code>git fetch</code>：使用<code>git fetch 仓库名 分支名</code><strong>抓取</strong>到本地，<strong>但不会进行合并</strong>，不指定名称则为全部</li>
+<li><code>git pull</code>：使用<code>git pull 仓库名 分支名</code><strong>拉取</strong>到本地，<strong>会自动合并</strong>，不指定名称则为全部</li>
+<li><strong>处理冲突</strong>：使用<code>git pull</code>来处理冲突</li>
+</ul>
+<hr>
+<h4 id="页底评论"><a href="#页底评论" class="headerlink" title="页底评论"></a><strong>页底评论</strong></h4><hr>
+</div></section><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="打赏" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><span class="icon iconify" data-icon="ri:hand-coin-line"></span></span><div id="reward-comment">手头阔绰?点这点这!money得斯!</div><div id="qr" style="display:none;"><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://s2.loli.net/2022/07/20/wWSp6bRENMGsDCj.png"><img loading="lazy" src="https://s2.loli.net/2022/07/20/wWSp6bRENMGsDCj.png" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><span class="icon iconify" data-icon="ri:wechat-pay-line"></span></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://s2.loli.net/2022/07/20/MaiIDcuVsqUWgyF.jpg"><img loading="lazy" src="https://s2.loli.net/2022/07/20/MaiIDcuVsqUWgyF.jpg" alt="支付宝" title="支付宝"></a><div><span style="color:#00A3EE"><span class="icon iconify" data-icon="ri:alipay-line"></span></span></div></div><div style="display:inline-block"><a target="_blank" rel="noopener" href="https://s2.loli.net/2022/07/20/Gqv92cabdg4OWkS.png"><img loading="lazy" src="https://s2.loli.net/2022/07/20/Gqv92cabdg4OWkS.png" alt="QQ 支付" title="QQ 支付"></a><div><span style="color:#12B7F5"><span class="icon iconify" data-icon="ri:qq-line"></span></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>圣奇宝枣</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://www.shengqibaozao.eu.org/2022/05/20/Git%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/" title="Git简单教程">https://www.shengqibaozao.eu.org/2022/05/20/Git%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2022/05/23/%E4%B8%80%E8%A8%80%E5%A5%BD%E5%8F%A5%E6%91%98%E6%8A%84/" rel="prev" title="一言好句摘抄"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">一言好句摘抄</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2022/05/14/%E5%BE%AE%E8%BD%AF%20Microsoft%205E%20%E5%BC%80%E5%8F%91%E8%80%85%E8%AE%A2%E9%98%85%E6%95%99%E7%A8%8B/" rel="next" title="微软 Microsoft 5E 开发者订阅教程"><span class="post-nav-text">微软 Microsoft 5E 开发者订阅教程</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>若您想及时得到回复提醒，也可以去B站私信我哦</span><br><span>如果较为紧急，建议添加微信或QQ，并注明来意</span><br><span>评论系统可能加载较慢，请耐心等待或刷新重试</span><br></div><div id="waline"></div><link rel="stylesheet" href="https://npm.elemecdn.com/@waline/client@v2/dist/waline.css"><script>window.CONFIG.waline.config.path = "/2022/05/20/Git%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/"</script><div class="js-Pjax"><script src="/js/comments/waline.js" type="module" defer></script></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 </span><span class="with-love" id="animate"><span class="icon iconify" data-icon="ri:cloud-line"></span></span><span class="author"> 圣奇宝枣</span></div><div class="live-time"><span>本博客已历经风霜坚持了</span><span id="display_live_time"></span><span class="moe-text">(￣▽￣)／</span><script>function blog_live_time() {
+  setTimeout(blog_live_time, 1000);
+  const start = new Date('2022-04-15T09:43:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = ` ${passDay} 天 ${passHour} 小时 ${passMinute} 分 ${passSecond} 秒`;
+}
+blog_live_time();
+</script></div><div class="footer-custom-text"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="18px" height="18px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve" style="vertical-align: middle;margin-right: 4px"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z" data-darkreader-inline-fill="" style="--darkreader-inline-fill:#4cc3ff;"></path></svg>Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="yun-logo" stroke="#000" width="18px" height="18px" viewBox="40 40 320 320" stroke-width="16" style="vertical-align: middle; margin-right: 4px; --darkreader-inline-stroke:#fffffe;" data-darkreader-inline-stroke=""> <defs> <line id="eye" x1="0" y1="-35" x2="0" y2="35" stroke-linecap="round"> <animateTransform attributeName="transform" additive="sum" attributeType="XML" type="scale" from="1 1" to="1 0" dur="0.15s" repeatCount="2"></animateTransform> </line> </defs> <polygon stroke-linejoin="round" fill="none" points="50,250 50,150 100,150 100,100 300,100 300,150 350,150 350,250 300,250 300,300 100,300 100,250 50,250"></polygon> <use xlink:href="#eye" transform="translate(150,200)"></use> <use xlink:href="#eye" transform="translate(250,200)"></use></svg><span>Yun</span></a> v1.10.4</span><div style="height: 8px;"></div>Deploys by<a href="https://vercel.com" target="_blank" rel="noopener noreferrer"><svg width="66.33" height="15" viewBox="0 0 283 64" id="vercel-logo" fill="#000" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; --darkreader-inline-fill:#060606;" data-darkreader-inline-fill=""><path d="M141.04 16c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-17.99-19-17.99zm-9.46 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zM248.72 16c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-17.99-19-17.99zm-9.45 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zM200.24 34c0 6 3.92 10 10 10 4.12 0 7.21-1.87 8.8-4.92l7.68 4.43c-3.18 5.3-9.14 8.49-16.48 8.49-11.05 0-19-7.2-19-18s7.96-18 19-18c7.34 0 13.29 3.19 16.48 8.49l-7.68 4.43c-1.59-3.05-4.68-4.92-8.8-4.92-6.07 0-10 4-10 10zm82.48-29v46h-9V5h9zM36.95 0L73.9 64H0L36.95 0zm92.38 5l-27.71 48L73.91 5H84.3l17.32 30 17.32-30h10.39zm58.91 12v9.69c-1-.29-2.06-.49-3.2-.49-5.81 0-10 4-10 10V51h-9V17h9v9.2c0-5.08 5.91-9.2 13.2-9.2z"></path></svg></a><br><img width="315" height="100" src="https://api.moedog.org/count/@ShengQiBaoZao?theme=rule34" style="margin-top:10px" alt></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#1975ff" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://npm.elemecdn.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><div class="aplayer no-destroy" id="aplayer" data-id="7514736165" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay data-theme="#1975ff" data-loop="all" data-order="random" data-preload="auto" data-volume="0.7" data-mutex data-lrctype="0" data-listfolded data-listmaxheight="340px" data-storagename="metingjs"></div><script src="https://npm.elemecdn.com/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style><!-- hexo injector body_end start --><script src="https://cdn.jsdelivr.net/npm/hexo-widget-tree@0.2.2/js/index.js"></script><div id="widget-tree">
+      <ul>
+      <li class="tree-list-item">
+        <i class="toggle-post-icon gg-folder-add"></i>
+        <a class="tree-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8/">
+          编程语言入门
+        </a>
+      <span class="tree-list-count">3</span><ul class="tree-list-children"><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/05/09/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" title="C语言基础教程"><i class="post-icon gg-file-document"></i>C语言基础教程</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/16/Python3%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" title="Python3基础教程"><i class="post-icon gg-file-document"></i>Python3基础教程</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/28/Python3%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/" title="Python3爬虫基础"><i class="post-icon gg-file-document"></i>Python3爬虫基础</a></li></ul></li>
+      <li class="tree-list-item">
+        <i class="toggle-post-icon gg-folder-add"></i>
+        <a class="tree-list-link" href="/categories/%E5%85%B6%E4%BB%96%E6%95%99%E7%A8%8B/">
+          其他教程
+        </a>
+      <span class="tree-list-count">7</span><ul class="tree-list-children"><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/06/21/Github%20Calendar%E6%95%99%E7%A8%8B%E6%96%87%E6%A1%A3/" title="Github Calendar教程文档"><i class="post-icon gg-file-document"></i>Github Calendar教程文档</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/06/16/Hexo%E5%8D%9A%E5%AE%A2SEO%E7%9B%B8%E5%85%B3%E6%94%B6%E5%BD%95%E6%95%99%E7%A8%8B/" title="Hexo博客SEO相关收录教程"><i class="post-icon gg-file-document"></i>Hexo博客SEO相关收录教程</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/26/PicGO%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/" title="PicGO图床配置"><i class="post-icon gg-file-document"></i>PicGO图床配置</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/05/24/%E4%BA%91%E6%B8%B8%E5%90%9BHexo%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/" title="云游君Hexo部署教程"><i class="post-icon gg-file-document"></i>云游君Hexo部署教程</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/05/24/%E4%BA%91%E6%B8%B8%E5%90%9Byun%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/" title="云游君yun主题配置教程"><i class="post-icon gg-file-document"></i>云游君yun主题配置教程</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/05/14/%E5%BE%AE%E8%BD%AF%20Microsoft%205E%20%E5%BC%80%E5%8F%91%E8%80%85%E8%AE%A2%E9%98%85%E6%95%99%E7%A8%8B/" title="微软 Microsoft 5E 开发者订阅教程"><i class="post-icon gg-file-document"></i>微软 Microsoft 5E 开发者订阅教程</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/06/18/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/" title="搜索引擎搜索技巧"><i class="post-icon gg-file-document"></i>搜索引擎搜索技巧</a></li></ul></li>
+      <li class="tree-list-item">
+        <i class="toggle-post-icon gg-folder-add"></i>
+        <a class="tree-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E6%8A%80%E8%83%BD%E6%95%99%E7%A8%8B/">
+          专业技能教程
+        </a>
+      <span class="tree-list-count">4</span><ul class="tree-list-children"><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/05/20/Git%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/" title="Git简单教程"><i class="post-icon gg-file-document"></i>Git简单教程</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/06/20/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/" title="Linux常用命令手册"><i class="post-icon gg-file-document"></i>Linux常用命令手册</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/24/Markdown%E8%AF%AD%E6%B3%95%E6%95%99%E7%A8%8B/" title="Markdown语法教程"><i class="post-icon gg-file-document"></i>Markdown语法教程</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/07/19/%E8%A7%A3%E5%86%B3Vercel%20CORS%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" title="解决Vercel CORS跨域问题"><i class="post-icon gg-file-document"></i>解决Vercel CORS跨域问题</a></li></ul></li>
+      <li class="tree-list-item">
+        <i class="toggle-post-icon gg-folder-add"></i>
+        <a class="tree-list-link" href="/categories/%E8%8B%B1%E6%96%87%E6%91%98%E6%8A%84/">
+          英文摘抄
+        </a>
+      <span class="tree-list-count">1</span><ul class="tree-list-children"><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/06/21/Quotefancy%E6%91%98%E6%8A%841/" title="Quotefancy摘抄1"><i class="post-icon gg-file-document"></i>Quotefancy摘抄1</a></li></ul></li>
+      <li class="tree-list-item">
+        <i class="toggle-post-icon gg-folder-add"></i>
+        <a class="tree-list-link" href="/categories/%E4%BB%A3%E7%A0%81%E7%BC%96%E8%BE%91%E5%99%A8/">
+          代码编辑器
+        </a>
+      <span class="tree-list-count">1</span><ul class="tree-list-children"><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/27/VScode%E9%85%8D%E7%BD%AE/" title="VScode配置"><i class="post-icon gg-file-document"></i>VScode配置</a></li></ul></li>
+      <li class="tree-list-item">
+        <i class="toggle-post-icon gg-folder-add"></i>
+        <a class="tree-list-link" href="/categories/%E5%85%B6%E4%BB%96/">
+          其他
+        </a>
+      <span class="tree-list-count">1</span><ul class="tree-list-children"><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/07/03/hexo-encrypt%E5%AF%86%E7%A0%81%E6%8F%92%E4%BB%B6%E6%B5%8B%E8%AF%95/" title="hexo-encrypt密码插件测试"><i class="post-icon gg-file-document"></i>hexo-encrypt密码插件测试</a></li></ul></li>
+      <li class="tree-list-item">
+        <i class="toggle-post-icon gg-folder-add"></i>
+        <a class="tree-list-link" href="/categories/%E5%A5%BD%E5%8F%A5%E6%91%98%E6%8A%84/">
+          好句摘抄
+        </a>
+      <span class="tree-list-count">12</span><ul class="tree-list-children"><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/27/%E4%B8%80%E5%8F%A5%E5%8F%B0%E8%AF%8D%E5%B0%B1%E6%98%AF%E4%B8%80%E9%83%A8%E7%94%B5%E5%BD%B1/" title="一句台词就是一部电影"><i class="post-icon gg-file-document"></i>一句台词就是一部电影</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/27/%E4%B8%80%E6%9C%AC%E4%B9%A6%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%8F%A5%EF%BC%8C%E9%83%BD%E6%98%AF%E6%84%8F%E9%9A%BE%E5%B9%B3/" title="一本书的最后一句，都是意难平"><i class="post-icon gg-file-document"></i>一本书的最后一句，都是意难平</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/05/23/%E4%B8%80%E8%A8%80%E5%A5%BD%E5%8F%A5%E6%91%98%E6%8A%84/" title="一言好句摘抄"><i class="post-icon gg-file-document"></i>一言好句摘抄</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/27/%E4%BB%80%E4%B9%88%E5%8F%AB%E7%9C%9F%E6%AD%A3%E7%9A%84%E9%87%8A%E6%80%80/" title="什么叫真正的释怀"><i class="post-icon gg-file-document"></i>什么叫真正的释怀</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/27/%E5%B0%BC%E9%87%87%E8%8A%82%E9%80%891/" title="尼采节选1"><i class="post-icon gg-file-document"></i>尼采节选1</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/27/%E5%B0%BC%E9%87%87%E8%8A%82%E9%80%892/" title="尼采节选2"><i class="post-icon gg-file-document"></i>尼采节选2</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/27/%E9%82%A3%E4%BA%9B%E5%85%85%E6%BB%A1%E5%B8%8C%E6%9C%9B%E7%9A%84%E5%8F%A5%E5%AD%90/" title="那些充满希望的句子"><i class="post-icon gg-file-document"></i>那些充满希望的句子</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/27/%E9%82%A3%E4%BA%9B%E6%95%91%E8%B5%8E%E8%BF%87%E6%88%91%E7%9A%84%E5%8F%A5%E5%AD%90/" title="那些救赎过我的句子"><i class="post-icon gg-file-document"></i>那些救赎过我的句子</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/27/%E9%82%A3%E4%BA%9B%E6%B8%85%E9%86%92%E5%8F%88%E8%87%AA%E6%8C%81%E7%9A%84%E4%BA%BA/" title="那些清醒又自持的人"><i class="post-icon gg-file-document"></i>那些清醒又自持的人</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/27/%E9%82%A3%E4%BA%9B%E8%AE%A9%E4%BD%A0%E8%A7%89%E5%BE%97%E4%B8%80%E8%BE%88%E5%AD%90%E9%83%BD%E5%86%99%E4%B8%8D%E5%87%BA%E6%9D%A5%E7%9A%84%E5%8F%A5%E5%AD%901/" title="那些让你觉得一辈子都写不出来的句子1"><i class="post-icon gg-file-document"></i>那些让你觉得一辈子都写不出来的句子1</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/27/%E9%82%A3%E4%BA%9B%E8%AE%A9%E4%BD%A0%E8%A7%89%E5%BE%97%E4%B8%80%E8%BE%88%E5%AD%90%E9%83%BD%E5%86%99%E4%B8%8D%E5%87%BA%E6%9D%A5%E7%9A%84%E5%8F%A5%E5%AD%902/" title="那些让你觉得一辈子都写不出来的句子2"><i class="post-icon gg-file-document"></i>那些让你觉得一辈子都写不出来的句子2</a></li><li class="tree-list-item"><a class="tree-list-post-link" href="/2022/04/27/%E9%82%A3%E4%BA%9B%E8%AE%A9%E4%BD%A0%E8%A7%89%E5%BE%97%E6%9E%81%E5%BA%A6%E8%AE%BD%E5%88%BA%E7%9A%84%E5%8F%A5%E5%AD%90/" title="那些让你觉得极度讽刺的句子"><i class="post-icon gg-file-document"></i>那些让你觉得极度讽刺的句子</a></li></ul></li></ul>
+        <div id="widget-tree-button">
+          <i class="gg-chevron-right"></i>
+        </div>
+      </div>
+  <script data-pjax src="https://cdn.jsdelivr.net/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://python-github-calendar-api.vercel.app/api?ShengQiBaoZao";
+            var git_color =['#ebedf0', '	#b3d9ff', '#80bfff', '#66b3ff', '	#59acff', '#4da6ff', '#409fff', '#3399ff', '	#2693ff', '#198cff', '#0080ff'];
+            var git_user ="ShengQiBaoZao";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<head><style type="text/css"><!--.recent-post-item{width:50%;}@media (max-width: 768px){.recent-post-item{width:100% !important;}--></style><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml,sitemap.txt"></head><div class="recent-post-item" style="width:50%;height:auto;margin:0 auto;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log('已挂载github calendar')
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><!-- hexo injector body_end end --><script src="https://npm.elemecdn.com/live2d-widget@3.x/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"https://npm.elemecdn.com/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json"},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":0,"vOffset":-100},"mobile":{"show":false},"dialog":{"enable":true,"hitokoto":true},"log":false});</script></body></html>
